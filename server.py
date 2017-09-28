@@ -1,47 +1,46 @@
 import socket
-import sys
+import json
 
-total_players=2
 questions=[]
-answers=[]
-options=[]
-scoreboard[0]=0
-scoreboard[1]=0
-count =0
-with open("questions.txt")  as q:
-    questions[count]=q[count][0]
-    options[questions[count]]=q[count][1]
-    answers[questions[count]]=q[count][2]
-
-sock=socket.socket(socket.AF_INET,socket.SOCK_SOCKDGRAM)
-server_address=('localhost',10000)
-sock.bind(server_address)
-print("[*]Server Started at %s:%s"%server_address)
+answers={}
+options={}
 players=[]
-countp=0
-while(len(players)<total_players):
-    data,address=sock.recvfrom(4096)
-    if data=="connect" and address not in players :
-        players[countp]=address
+count=0
 
-playerno=0
+with open("quiz.json") as o:
+    a=json.load(o)
+    for i in a:
+        questions.append(i['question'])
+        answers[i['question']]=i['answer']
+        options[i['question']]=i['options']
+        #print (" [*] "+str(count)+"   "+str(i))
+        count+=1
+
+server=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+server.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+server_address=address=('localhost',10000)
+server.bind(server_address)
+
+print("[*]Server started at %s:%s"%(server_address))
+while len(players)<2:
+    data,address=server.recvfrom(4096)
+    if(data=="connect" and address not in players):
+        server.sendto("[*]Connection Completed Successfully",address)
+        players.append(address)
+        print("[*]Player "+str(len(players))+" joined from "+address[0])
+#print(players)
+print("[*]The Quiz Begins")
+playerno=0;
 for question in questions:
-    sock.sendto(question,players[playerno])
-    data,address=sock.recvfrom()
-    if address==players[playerno]:
-        if data==answers[question]:
-            scoreboard[playerno]+=1
-            playerno+=1
-        else:
-            playerno+=1
+    o=""
+    for i in range(4):
+        o+=options[question][i]+" "
+    print(question+"\n"+o)
+    print(players[playerno])
+    server.sendto(question+"\n"+o,players[playerno])
+    data,address=server.recvfrom(4096)
+    if(address==players[playerno]):
+        print(data)
+    playerno+=1
     if playerno>1:
         playerno=0
-
-if scoreboard[0]>scoreboard[1]:
-    print("****Player 1 Wins****")
-
-if scoreboard[0]<scoreboard[1]:
-    print("****Player 2 Wins****")
-
-else:
-    print("****Tie Game****")

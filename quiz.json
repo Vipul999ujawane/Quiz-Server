@@ -1,0 +1,82 @@
+[
+  {
+    "question": "ABCD1",
+    "answer": "a",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD2",
+    "answer": "b",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD3",
+    "answer": "c",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD4",
+    "answer": "d",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD5",
+    "answer": "a",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD6",
+    "answer": "b",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD7",
+    "answer": "c",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "question": "ABCD8",
+    "answer": "d",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  }
+]
