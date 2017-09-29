@@ -11,7 +11,7 @@ if ans=='Y':
     client.sendto("connect",server_address)
     data,address = client.recvfrom(4096)
     if address==server_address:
-        print ("Server responded %s"%(data))
+        print ((data))
 while True:
     data,address=client.recvfrom(4096)
     print(data)
