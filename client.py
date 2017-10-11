@@ -15,6 +15,8 @@ if ans=='Y':
 while True:
     data,address=client.recvfrom(4096)
     print(data)
+    if data=="End":
+        break
     if address==server_address:
         a=raw_input()
         client.sendto(a,server_address)

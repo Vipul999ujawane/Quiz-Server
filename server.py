@@ -63,7 +63,7 @@ for question in questions:
             score[cplayerno(playerno)]+=2
             rand=server.recv(10)
         else:
-            server.sendto("[*]Wrong answer. Question Sent to challenger. Any key to continue ",players[cplayerno(playerno)])
+            server.sendto("[*]Wrong answer. Any key to continue ",players[cplayerno(playerno)])
             rand=server.recv(10)
             if(c=='Y'):
                 server.sendto("[*](Challenge Question. Send 0 to opt out.) "+question+"\n"+o,players[cplayerno(playerno+1)])
@@ -84,5 +84,9 @@ for question in questions:
         playerno+=1
         playerno=cplayerno(playerno)
 
+print("Player 1")
 print(score[0])
+print("Player 2")
 print(score[1])
+server.sendto("End",players[0])
+server.sendto("End",players[1])
